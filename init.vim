@@ -1,12 +1,27 @@
-
-filetype plugin indent on
-syntax on
-set number
-set noshowmode
+filetype plugin indent on           " enable filetype plugins
+syntax on                           " enable syntax highlighting
+set number                          " Enable line numbers
+set path=$PWD/**                    " Set path to nvim opened dir for fuzzy :find
+set tabstop=4                       " The width of a TAB is set to 4.  Still it is a \t. It is just that Vim will interpret it to be having a width of 4.
+set shiftwidth=4                    " Indents will have a width of 4
+set softtabstop=4                   " Sets the number of columns for a TAB
+set expandtab                       " Expand TABs to spaces
+set cursorline                      " Highlight the current line
+set ttyfast                         " Faster scrolling if supported by term emu
+set lazyredraw                      " Better performance (ties in with above)
+set noshowmode                      " disable default mode indicator
+set wildmenu                        " enable wildmenu (tab completion for :find etc)
+set wrap                            " enable word wrapping
+set encoding=utf-8                  " set default encoding
+set mouse=                          " disable mouse input (empty means disabled)
+set incsearch                       " show search matches as you type
+set hlsearch                        " highlight search results
+set ignorecase
+set smartcase                       " ignore casing only if lowercase
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1   " enable true color support for neovim in iTerm2
 
 nnoremap <C-F10> :edit ~/.config/nvim/init.vim<CR>
 
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 call plug#begin('~/vim/plugged')
 
@@ -39,8 +54,6 @@ autocmd FileType netrw setl bufhidden=wipe
 autocmd QuickFixCmdPost [^l]* nested cwindow
 autocmd QuickFixCmdPost    l* nested lwindow
 
-" fuzzy file finding
-set path=$PWD/**
 
 " tab switching
 nnoremap <C-Left> :tabprevious<CR>                                                                            
@@ -53,6 +66,7 @@ colorscheme gruvbox
 
 " airline config
 let g:airline_theme='hybrid'
+
 " language specifics
 
 " JS / JSX / TS
@@ -67,18 +81,6 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'typescript': ['tslint']
 \}
-
-" tabs and spaces
-set tabstop=4       " The width of a TAB is set to 4.
-                    " Still it is a \t. It is just that
-                    " Vim will interpret it to be having
-                    " a width of 4.
-
-set shiftwidth=4    " Indents will have a width of 4
-
-set softtabstop=4   " Sets the number of columns for a TAB
-
-set expandtab       " Expand TABs to spaces
 
 " Opens netrw in vertical split
 " SEE: https://stackoverflow.com/a/51199145 
