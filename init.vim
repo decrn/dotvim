@@ -1,3 +1,11 @@
+
+" augroup CoqtailHighlights
+"   autocmd!
+"   autocmd ColorScheme *
+"     \  hi def CoqtailChecked ctermbg=0
+"     \| hi def CoqtailSent    ctermbg=255
+" augroup END
+
 call plug#begin('~/.vim/plugged')
 Plug 'ayu-theme/ayu-vim'
 Plug 'godlygeek/tabular'
@@ -10,7 +18,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'caenrique/nvim-toggle-terminal'
-
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+Plug 'whonore/Coqtail'
 " load icons LAST
 Plug 'ryanoasis/vim-devicons'
 call plug#end()
@@ -133,4 +142,38 @@ nnoremap gd :ALEGoToDefinition<CR>
 " floaterm
 nnoremap <silent> <C-z> :ToggleTerminal<Enter>
 tnoremap <silent> <C-z> <C-\><C-n>:ToggleTerminal<Enter>
-set shell=/usr/bin/zsh
+set shell=/bin/zsh
+
+" devicons color
+let s:brown = "905532"
+let s:aqua =  "3AFFDB"
+let s:blue = "689FB6"
+let s:darkBlue = "44788E"
+let s:purple = "834F79"
+let s:lightPurple = "834F79"
+let s:red = "AE403F"
+let s:beige = "F5C06F"
+let s:yellow = "F09F17"
+let s:orange = "D4843E"
+let s:darkOrange = "F16529"
+let s:pink = "CB6F6F"
+let s:salmon = "EE6E73"
+let s:green = "8FAA54"
+let s:lightGreen = "31B53E"
+let s:white = "FFFFFF"
+let s:rspec_red = 'FE405F'
+let s:git_orange = 'F54D27'
+let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreeExtensionHighlightColor['hs'] = s:purple " sets the color of css files to blue
+let g:NERDTreeExtensionHighlightColor['md'] = s:blue " sets the color of css files to blue
+let g:WebDevIconsDefaultFileSymbolColor = s:blue " sets the color for files that did not match any rule
+
+" coqtail
+noremap <F7> :CoqUndo<CR>:CoqJumpToEnd<CR>
+noremap <F8> :CoqToLine<CR>:CoqJumpToEnd<CR>
+noremap <F9> :CoqNext<CR>:CoqJumpToEnd<CR>
+
+function! g:CoqtailHighlight()
+    hi def link CoqtailChecked Visual
+    hi def link CoqtailSent PmenuSel
+endfunction
